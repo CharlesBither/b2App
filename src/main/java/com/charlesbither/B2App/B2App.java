@@ -1,4 +1,4 @@
-package com.charlesbither.b2App;
+package com.charlesbither.B2App;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,14 +13,11 @@ public class B2App {
     public static void main(String[] args) {
 
         UploadFile uploadFile = new UploadFile();
-        Reader reader = new Reader();
-
         List<String> authList = Authorization.authorizationList();
         APIUrl = authList.get(0);
         authToken = authList.get(1);
-
-        System.out.println("url = " + APIUrl);
-        System.out.println("token = " + authToken);
+//        System.out.println("url = " + APIUrl);
+//        System.out.println("token = " + authToken);
 
         File file = new File("hello.txt");
         try {

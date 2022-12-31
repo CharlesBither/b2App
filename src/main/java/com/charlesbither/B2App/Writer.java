@@ -1,4 +1,4 @@
-package com.charlesbither.b2App;
+package com.charlesbither.B2App;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

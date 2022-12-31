@@ -1,4 +1,4 @@
-package com.charlesbither.b2App;
+package com.charlesbither.B2App;
 
 import org.json.JSONObject;
 
@@ -51,9 +51,8 @@ public class UploadURL {
             list.add(uploadUrl);
             list.add(authorizationToken);
 
-            System.out.println("Upload url = " + list.get(0));
-            System.out.println("uploadToken = " + list.get(1));
-            // return upload length?
+//            System.out.println("Upload url = " + list.get(0));
+//            System.out.println("uploadToken = " + list.get(1));
 
         } catch (Exception e) {
             e.printStackTrace();

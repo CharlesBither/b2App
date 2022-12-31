@@ -1,4 +1,4 @@
-package com.charlesbither.b2App;
+package com.charlesbither.B2App;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -24,14 +24,9 @@ public class UploadFile {
 
         // Get file header info
         String fileName = file.getName(); // The name of the file you are uploading
-        String contentType = "text/plain"; // The content type of the file
 
         // Get file body
         byte[] fileData = Files.readAllBytes(file.toPath());
-        Integer length = fileData.length;
-        String sLength = length.toString();
-        System.out.println(sLength);
-        System.out.println(uploadAuthorizationToken);
 
         try {
             URL url = new URL(uploadUrl);
