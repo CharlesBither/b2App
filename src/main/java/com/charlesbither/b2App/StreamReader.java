@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class StreamReader {
-    public static String myInputStreamReader(InputStream in) throws IOException {
+    public String myInputStreamReader(InputStream in) throws IOException {
         InputStreamReader reader = new InputStreamReader(in);
         StringBuilder sb = new StringBuilder();
         int c = reader.read();

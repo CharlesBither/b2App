@@ -21,6 +21,7 @@ public class Authorization {
         String headerForAuthorizeAccount = "Basic " + Base64.getEncoder().encodeToString((applicationKeyId + ":" + applicationKey).getBytes());
 
         ArrayList<String> list = new ArrayList<>();
+        StreamReader streamReader = new StreamReader();
 
         try {
             URL url = new URL("https://api.backblazeb2.com/b2api/v2/b2_authorize_account");
@@ -28,10 +29,11 @@ public class Authorization {
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Authorization", headerForAuthorizeAccount);
             InputStream in = new BufferedInputStream(connection.getInputStream());
-            String jsonResponse = StreamReader.myInputStreamReader(in);
+            String jsonResponse = streamReader.myInputStreamReader(in);
 
             //API URL & authorizationToken
             JSONObject json = new JSONObject(jsonResponse);
+            //System.out.println(jsonResponse);
             String apiUrl = json.getString("apiUrl");
             String authorizationToken = json.getString("authorizationToken");
 
