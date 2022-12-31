@@ -11,9 +11,9 @@ import java.util.List;
 
 public class UploadURL {
 
-    String accountToken = b2App.authToken;
-    String apiUrl = b2App.APIUrl;
-    String bucketId = b2App.bucketID;
+    String accountToken = B2App.authToken;
+    String apiUrl = B2App.APIUrl;
+    String bucketId = B2App.bucketID;
 
     public List<String> getUploadURL() {
 

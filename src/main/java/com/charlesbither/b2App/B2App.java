@@ -2,10 +2,9 @@ package com.charlesbither.b2App;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class b2App {
+public class B2App {
 
     static String APIUrl;
     static String authToken;
