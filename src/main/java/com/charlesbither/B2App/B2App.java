@@ -1,7 +1,5 @@
 package com.charlesbither.B2App;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class B2App {
@@ -9,25 +7,22 @@ public class B2App {
     static String APIUrl;
     static String authToken;
     static String bucketID = System.getenv("BUCKET_ID");
+    static String uploadUrl;
+    static String uploadAuthToken;
 
     public static void main(String[] args) {
 
-        UploadFile uploadFile = new UploadFile();
         List<String> authList = Authorization.authorizationList();
         APIUrl = authList.get(0);
         authToken = authList.get(1);
-//        System.out.println("url = " + APIUrl);
-//        System.out.println("token = " + authToken);
+        UploadURL uploadURL = new UploadURL();
 
-        File file = new File("hello.txt");
-        try {
-            uploadFile.uploadFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String[] arr = uploadURL.getUploadURL();
+        uploadUrl = arr[0];
+        uploadAuthToken = arr[1];
 
-
-
+        Reader reader = new Reader();
+        String path = "C:\\Bucket";
+        reader.traverseDirs(path, "");
     }
-
 }
