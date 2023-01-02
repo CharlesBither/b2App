@@ -1,4 +1,4 @@
-package com.charlesbither.b2App;
+package com.charlesbither.B2App;
 
 import org.json.JSONObject;
 
@@ -6,8 +6,6 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UploadURL {
 
@@ -15,15 +13,12 @@ public class UploadURL {
     String apiUrl = B2App.APIUrl;
     String bucketId = B2App.bucketID;
 
-    public List<String> getUploadURL() {
+    public String[] getUploadURL() {
 
-        ArrayList<String> list = new ArrayList<>();
         StreamReader streamReader = new StreamReader();
 
         HttpURLConnection connection = null;
         String postParams = "{\"bucketId\":\"" + bucketId + "\"}";
-
-        System.out.println(postParams);
 
         byte[] postData = postParams.getBytes(StandardCharsets.UTF_8);
         try {
@@ -41,19 +36,12 @@ public class UploadURL {
             DataOutputStream writer = new DataOutputStream(connection.getOutputStream());
             writer.write(postData);
             String jsonResponse = streamReader.myInputStreamReader(connection.getInputStream());
-
-            //System.out.println(jsonResponse);
-
             JSONObject json = new JSONObject(jsonResponse);
             String uploadUrl = json.getString("uploadUrl");
             String authorizationToken = json.getString("authorizationToken");
 
-            list.add(uploadUrl);
-            list.add(authorizationToken);
-
-            System.out.println("Upload url = " + list.get(0));
-            System.out.println("uploadToken = " + list.get(1));
-            // return upload length?
+            String[] list = {uploadUrl, authorizationToken};
+            return list;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,6 +49,6 @@ public class UploadURL {
             connection.disconnect();
         }
 
-        return list;
+        return null;
     }
 }
