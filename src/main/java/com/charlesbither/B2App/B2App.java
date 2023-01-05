@@ -1,5 +1,6 @@
 package com.charlesbither.B2App;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -45,7 +46,7 @@ public class B2App {
                 List<WatchEvent<?>> eventsList = watchKey.pollEvents();
 //  for all events create a loop that iterates till the end of the
 // list
-                for (WatchEvent event : eventsList) {
+                for (WatchEvent<?> event : eventsList) {
 //  get the file name for the event
                     Path fileWatched = (Path) event.context();
                     if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
@@ -58,7 +59,16 @@ public class B2App {
                     }
 //  file is modified.
                     if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
-                        System.out.println("File modified: " + fileWatched);
+
+
+                        Path path = Watcher.keyMap.get(watchKey);
+                        String fullPath = path.toString() + "\\" + fileWatched;
+                        File file = new File(fullPath);
+                        if(!file.isDirectory()) {
+                            long time = new File(fullPath).lastModified();
+                            System.out.println("File modified: " + fileWatched);
+                            System.out.println(time);
+                        }
                     }
                 }
             } catch (Exception e) {

@@ -23,12 +23,12 @@ public class Reader {
         UploadFile uploadFile = new UploadFile();
         System.out.println("*******START RECURSIVE FUNCTION*******");
         File file = new File(path);
-        if(file.exists() && file.isDirectory()) {
+        if (file.exists() && file.isDirectory()) {
             File[] arr = file.listFiles();
-            for(File f : arr) {
+            for (File f : arr) {
                 String append = "\\" + f.getName();
                 try {
-                    if(f.isDirectory()) {
+                    if (f.isDirectory()) {
                         System.out.println(offset + "dir = " + append);
                         traverseDirs(path + append, offset + "-");
                     } else {
