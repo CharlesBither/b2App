@@ -13,6 +13,7 @@ public class B2App {
     static String bucketID = System.getenv("BUCKET_ID");
     static String uploadUrl;
     static String uploadAuthToken;
+    static String srcPath = System.getenv("SRC_PATH");
 
     public static void main(String[] args) {
 
@@ -29,52 +30,8 @@ public class B2App {
 //        String pathStr = "C:\\Bucket";
 //        reader.traverseDirs(pathStr, "");
 
-        Path dir = Path.of("C:\\Users\\bithe\\Buckets");
+        Watcher.init(srcPath);
 
-        while (true) {
-            try {
-// java watcher : create an instance of the watch Service
-                Path pathDirectory = Paths.get("C:\\Users\\bithe\\Buckets");
-                WatchService watcher = pathDirectory.getFileSystem().newWatchService();
-// java watcher : register the events that are to be notified.
-                //pathDirectory.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE,StandardWatchEventKinds.ENTRY_MODIFY);
-                Watcher watcherClass = new Watcher();
-                watcherClass.watch(watcher, pathDirectory);
-// java watcher : watch key
-                WatchKey watchKey = watcher.take();
-// java watcher : enter the events into a list
-                List<WatchEvent<?>> eventsList = watchKey.pollEvents();
-//  for all events create a loop that iterates till the end of the
-// list
-                for (WatchEvent<?> event : eventsList) {
-//  get the file name for the event
-                    Path fileWatched = (Path) event.context();
-                    if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
-//file is created
-                        System.out.println("File created: " + fileWatched);
-                    }
-// file is deleted
-                    if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
-                        System.out.println("File deleted: " + fileWatched);
-                    }
-//  file is modified.
-                    if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
-
-
-                        Path path = Watcher.keyMap.get(watchKey);
-                        String fullPath = path.toString() + "\\" + fileWatched;
-                        File file = new File(fullPath);
-                        if(!file.isDirectory()) {
-                            long time = new File(fullPath).lastModified();
-                            System.out.println("File modified: " + fileWatched);
-                            System.out.println(time);
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.toString());
-            }
-        }
 
         //Watcher watcher = new Watcher();
 //        try {
